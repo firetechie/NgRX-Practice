@@ -17,5 +17,5 @@ import { CustomCounterComponent } from './components/custom-counter/custom-count
   styleUrl: './app.component.css',
 })
 export class AppComponent {
-  title = 'ngrx_practice';
+  title = 'NgRX Practice';
 }

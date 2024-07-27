@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { customCounter, decrement, increment, reset } from './counter.action';
+import { customCounter, decrement, increment, reset, titleChange } from './counter.action';
 import { initialState } from './counter.state';
 
 const _counterReducer = createReducer(
@@ -27,6 +27,12 @@ const _counterReducer = createReducer(
       ...state,
       counter: (action.customAction === 'add' ?
         state.counter + action.customValue : state.counter - action.customValue),
+    };
+  }),
+  on(titleChange, (state, action) => {
+    return {
+      ...state,
+      title: action.title,
     };
   })
 );

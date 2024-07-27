@@ -6,3 +6,8 @@
 .mat-mdc-form-field {
   width: 100%;
 }
+
+h4.mat-error {
+  color: red;
+  font-size: 14px;
+}

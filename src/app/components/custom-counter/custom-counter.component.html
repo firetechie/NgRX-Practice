@@ -1,5 +1,6 @@
 <mat-card>
     <mat-card-content>
+        <h2><em>{{ title$ | async }}</em></h2>
         <mat-form-field>
             <mat-label>Counter Input</mat-label>
             <input matInput [(ngModel)]="customValue">
@@ -12,8 +13,10 @@
             </mat-select>
         </mat-form-field>
         <br>
-        <button mat-raised-button color="primary" (click)="increment()">
+        <button mat-raised-button style="background-color: green; color: white;" (click)="submit()">
             Proceed
         </button>
+        <br>
+        <h4 class="mat-error">{{errorMessage}}</h4>
     </mat-card-content>
 </mat-card>

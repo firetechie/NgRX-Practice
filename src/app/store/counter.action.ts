@@ -7,3 +7,7 @@ export const customCounter = createAction(
   'customCounter',
   props<{ customValue: number, customAction: string }>()
 );
+export const titleChange = createAction(
+  'titleChange',
+  props<{ title: string }>()
+);
