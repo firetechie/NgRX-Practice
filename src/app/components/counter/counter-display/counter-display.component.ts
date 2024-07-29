@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Counter } from '../../shared/model/counter';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
-import { getCounter } from '../../store/counter.selector';
+import { getCounter } from '../../../store/counter/counter.selector';
+import { AppState } from '../../../shared/model/global/app-state';
 
 @Component({
   selector: 'app-counter-display',
@@ -17,15 +17,9 @@ export class CounterDisplayComponent implements OnInit {
   title: string = '';
   counter$ !: Observable<number>;
 
-  constructor(private store: Store<{ counter: Counter }>) { }
+  constructor(private store: Store<AppState>) { }
 
   ngOnInit(): void {
-    // this.store
-    //   .select('counter')
-    //   .subscribe((data) => {
-    //     this.displayCounter = data.counter;
-    //     this.title = data.title;
-    //   });
     this.counter$ = this.store.select(getCounter);
   }
 }

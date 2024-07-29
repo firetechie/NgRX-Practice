@@ -1,0 +1,11 @@
+<h1>Technology Blogs</h1>
+@for (blog of blogs$ | async; track blog) {
+  <mat-card>
+    <mat-card-header>
+      <h2><strong>{{blog.title}}</strong></h2>
+    </mat-card-header>
+    <mat-card-content>
+      <p>{{blog.description}}</p>
+    </mat-card-content>
+  </mat-card>
+}

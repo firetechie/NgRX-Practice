@@ -1,8 +1,8 @@
 import { MatButtonModule } from '@angular/material/button';
 import { Store } from '@ngrx/store';
-import { increment, decrement, reset, titleChange } from './../../store/counter.action';
 import { Component } from '@angular/core';
-import { Counter } from '../../shared/model/counter';
+import { increment, decrement, reset, titleChange } from '../../../store/counter/counter.action';
+import { AppState } from '../../../shared/model/global/app-state';
 
 @Component({
   selector: 'app-counter-buttons',
@@ -12,7 +12,7 @@ import { Counter } from '../../shared/model/counter';
   styleUrl: './counter-buttons.component.css',
 })
 export class CounterButtonsComponent {
-  constructor(private store: Store<{ counter: Counter }>) {}
+  constructor(private store: Store<AppState>) {}
 
   increment() {
     this.store.dispatch(increment());
