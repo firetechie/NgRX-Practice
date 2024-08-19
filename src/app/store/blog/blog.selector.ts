@@ -1,6 +1,7 @@
 import { createFeatureSelector, createSelector } from "@ngrx/store";
-import { Blog } from "../../shared/model/blog";
+import { Blog, Blogs } from "../../shared/model/blog";
 
-const getBlogState = createFeatureSelector<Blog[]>('blog');
+const getBlogState = createFeatureSelector<Blogs>('blog');
 
-export const getBlog = createSelector(getBlogState, (state: Blog[]) => state)
+export const getBlog = createSelector(getBlogState, (state: Blogs) => state.blogList)
+export const fetchBlogById = (blogId: number) => createSelector(getBlogState, (state: Blogs) => state.blogList.find((blog: Blog) => blog.id === blogId))
