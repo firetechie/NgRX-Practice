@@ -1,7 +1,9 @@
 import { blogReducer } from "../blog/blog.reducer";
 import { counterReducer } from "../counter/counter.reducer";
+import { appReducer } from "./app.reducer";
 
-export const appState = {
+export const GlobalState = {
     counter: counterReducer,
-    blog: blogReducer
+    blog: blogReducer,
+    app: appReducer
 }

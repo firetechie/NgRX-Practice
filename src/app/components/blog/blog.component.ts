@@ -7,10 +7,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddUpdateBlogComponent } from './add-update-blog/add-update-blog.component';
 import { MatIconModule } from '@angular/material/icon';
-import { AppState } from '../../shared/model/global/app.state';
 import { loadBlog, deleteBlog } from '../../store/blog/blog.action';
 import { Blogs } from '../../shared/model/blog';
 import { getBlogInfo } from '../../store/blog/blog.selector';
+import { spinner } from '../../store/global/app.action';
 
 @Component({
   selector: 'app-blog',
@@ -24,12 +24,16 @@ export class BlogComponent implements OnInit {
   blogInfo$ !: Observable<Blogs>;
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<Blogs>,
     private dialog: MatDialog,
   ) { }
 
   ngOnInit(): void {
-    this.store.dispatch(loadBlog());
+    this.store.dispatch(spinner({ isLoader: true }))
+    setTimeout(() => {
+      this.store.dispatch(loadBlog());
+      this.store.dispatch(spinner({ isLoader: false }))
+    }, 1000);
     // this.blogs$ = this.store.select(getBlog);
     this.blogInfo$ = this.store.select(getBlogInfo);
     // this.store.select(getBlogInfo).subscribe((blogInfo) => this.blogInfo = blogInfo);
@@ -55,8 +59,12 @@ export class BlogComponent implements OnInit {
   }
 
   deleteBlog(id: number): void {
+    this.store.dispatch(spinner({ isLoader: true }))
     if (confirm("Are you sure you want to remove?")) {
-      this.store.dispatch(deleteBlog({ id: id }))
+      setTimeout(() => {
+        this.store.dispatch(deleteBlog({ id: id }))
+        this.store.dispatch(spinner({ isLoader: false }))
+      }, 1000);
     }
   }
 }

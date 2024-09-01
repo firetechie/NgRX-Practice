@@ -1,5 +1,5 @@
 import { createReducer, on } from '@ngrx/store';
-import { initialState } from './blog.store';
+import { initialState } from './blog.state';
 import { addBlogSuccess, deleteBlogSuccess, loadBlog, loadBlogFail, loadBlogSuccess, updateBlogSuccess } from './blog.action';
 import { Blog } from '../../shared/model/blog';
 

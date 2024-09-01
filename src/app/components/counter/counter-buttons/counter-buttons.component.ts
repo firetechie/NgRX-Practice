@@ -2,7 +2,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
 import { increment, decrement, reset, titleChange } from '../../../store/counter/counter.action';
-import { AppState } from '../../../shared/model/global/app.state';
+import { Counter } from '../../../shared/model/counter';
 
 @Component({
   selector: 'app-counter-buttons',
@@ -12,7 +12,7 @@ import { AppState } from '../../../shared/model/global/app.state';
   styleUrl: './counter-buttons.component.css',
 })
 export class CounterButtonsComponent {
-  constructor(private store: Store<AppState>) {}
+  constructor(private store: Store<Counter>) { }
 
   increment() {
     this.store.dispatch(increment());
@@ -27,6 +27,6 @@ export class CounterButtonsComponent {
   }
 
   change() {
-    this.store.dispatch(titleChange({title: 'NgRX learning is in progress'}));
+    this.store.dispatch(titleChange({ title: 'NgRX learning is in progress' }));
   }
 }

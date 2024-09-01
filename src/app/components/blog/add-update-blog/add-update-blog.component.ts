@@ -6,10 +6,10 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { Blog } from '../../../shared/model/blog';
+import { Blog, Blogs } from '../../../shared/model/blog';
 import { updateBlog, addBlog } from '../../../store/blog/blog.action';
 import { fetchBlogById } from '../../../store/blog/blog.selector';
-import { AppState } from '../../../shared/model/global/app.state';
+import { spinner } from '../../../store/global/app.action';
 
 @Component({
   selector: 'app-add-update-blog',
@@ -25,7 +25,7 @@ export class AddUpdateBlogComponent implements OnInit, AfterViewInit {
   editBlogId !: number;
 
   constructor(
-    private store: Store<AppState>,
+    private store: Store<Blogs>,
     private dialog: MatDialogRef<AddUpdateBlogComponent>,
     private fb: FormBuilder,
     @Inject(MAT_DIALOG_DATA) public data: any
@@ -51,17 +51,23 @@ export class AddUpdateBlogComponent implements OnInit, AfterViewInit {
 
   submit(): void {
     if (this.blogForm.valid) {
+      this.store.dispatch(spinner({ isLoader: true }))
       const blogInput: Blog = {
         id: 0,
         title: this.blogForm.get('title')?.value,
         description: this.blogForm.get('desc')?.value
       }
-      if (this.data.isEdit) {
-        blogInput.id = this.editBlogId;
-        this.store.dispatch(updateBlog({ blogInput: blogInput }))
-      } else {
-        this.store.dispatch(addBlog({ blogInput: blogInput }))
-      }
+
+      setTimeout(() => {
+        if (this.data.isEdit) {
+          blogInput.id = this.editBlogId;
+          this.store.dispatch(updateBlog({ blogInput: blogInput }))
+          this.store.dispatch(spinner({ isLoader: false }))
+        } else {
+          this.store.dispatch(addBlog({ blogInput: blogInput }))
+          this.store.dispatch(spinner({ isLoader: false }))
+        }
+      }, 1000);
       this.close();
     }
   }

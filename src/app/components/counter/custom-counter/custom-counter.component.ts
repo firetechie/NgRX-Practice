@@ -5,13 +5,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatSelectModule } from '@angular/material/select';
 import { Store } from '@ngrx/store';
 import { FormsModule } from '@angular/forms';
-import { Counter } from '../../../shared/model/counter';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { getTitle } from '../../../store/counter/counter.selector';
 import { customCounter } from '../../../store/counter/counter.action';
-import { AppState } from '../../../shared/model/global/app.state';
+import { Counter } from '../../../shared/model/counter';
 
 @Component({
   selector: 'app-custom-counter',
@@ -26,7 +25,7 @@ export class CustomCounterComponent implements OnInit {
   errorMessage: string = '';
   title$ !: Observable<string>;
 
-  constructor(private store: Store<AppState>) { }
+  constructor(private store: Store<Counter>) { }
 
   ngOnInit(): void {
     this.title$ = this.store.select(getTitle);
