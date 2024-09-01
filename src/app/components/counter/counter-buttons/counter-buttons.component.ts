@@ -2,7 +2,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { Store } from '@ngrx/store';
 import { Component } from '@angular/core';
 import { increment, decrement, reset, titleChange } from '../../../store/counter/counter.action';
-import { AppState } from '../../../shared/model/global/app-state';
+import { AppState } from '../../../shared/model/global/app.state';
 
 @Component({
   selector: 'app-counter-buttons',

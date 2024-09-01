@@ -1,19 +1,24 @@
 {
-    "Blogs": [
-        {
-            "id": 1,
-            "title": "Angular 16",
-            "description": "Angular 16 is an opensource powered by google"
-        },
-        {
-            "id": 2,
-            "title": "React",
-            "description": "React is an opensource powered by META"
-        },
-        {
-            "id": 3,
-            "title": "Java",
-            "description": "Java Tech"
-        }
-    ]
+  "Blogs": [
+    {
+      "id": 1,
+      "title": "Angular-18",
+      "description": "Angular-18 is an open-source framework powered by Google"
+    },
+    {
+      "id": 2,
+      "title": "React",
+      "description": "React is an open-source library powered by Meta"
+    },
+    {
+      "id": 4,
+      "title": ".NET",
+      "description": "NewTech"
+    },
+    {
+      "id": 5,
+      "title": "Java",
+      "description": "Vast community"
+    }
+  ]
 }

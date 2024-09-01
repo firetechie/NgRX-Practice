@@ -1,0 +1,43 @@
+<div style="text-align: center;">
+    <h1>Technology Blogs</h1>
+    <br />
+    <button mat-raised-button color="primary" (click)="openAddBlog()">Add</button>
+
+    @if (blogInfo$ | async; as blogInfo) {
+    <div>
+        @if (blogInfo.errorMessage) {
+        <div>
+            <mat-card>
+                <mat-card-header>Error Occurred</mat-card-header>
+                <mat-card-content [style.color]="'red'">{{ blogInfo.errorMessage }}</mat-card-content>
+            </mat-card>
+        </div>
+        } @else {
+        <div>
+            @for (blog of blogInfo.blogList; track blog){
+            <mat-card>
+                <mat-card-header>
+                    <h2><strong>{{ blog.title }}</strong></h2>
+                    <div style="width: 100%; text-align: right;">
+                        <button mat-raised-button style="background-color: rgb(2, 70, 2); color: white;"
+                            (click)="openUpdateBlog(blog.id)">
+                            <mat-icon fontIcon="edit"></mat-icon>
+                        </button>
+                        <button mat-raised-button style="background-color: rgb(143, 58, 8); color: white;"
+                            (click)="deleteBlog(blog.id)">
+                            <mat-icon fontIcon="delete"></mat-icon>
+                        </button>
+                    </div>
+                </mat-card-header>
+                <mat-card-content>
+                    <p>{{ blog.description }}</p>
+                </mat-card-content>
+            </mat-card>
+            } @empty {
+            <mat-card>No Blog Found</mat-card>
+            }
+        </div>
+        }
+    </div>
+    }
+</div>

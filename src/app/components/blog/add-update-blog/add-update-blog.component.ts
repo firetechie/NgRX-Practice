@@ -1,15 +1,15 @@
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { AfterViewInit, Component, Inject, OnInit } from '@angular/core';
 import { MatCardModule } from '@angular/material/card';
-import { AppState } from '../../../../shared/model/global/app-state';
 import { Store } from '@ngrx/store';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
-import { Blog } from '../../../../shared/model/blog';
-import { addBlog, upadteBlog } from '../../../../store/blog/blog.action';
-import { fetchBlogById } from '../../../../store/blog/blog.selector';
+import { Blog } from '../../../shared/model/blog';
+import { updateBlog, addBlog } from '../../../store/blog/blog.action';
+import { fetchBlogById } from '../../../store/blog/blog.selector';
+import { AppState } from '../../../shared/model/global/app.state';
 
 @Component({
   selector: 'app-add-update-blog',
@@ -58,7 +58,7 @@ export class AddUpdateBlogComponent implements OnInit, AfterViewInit {
       }
       if (this.data.isEdit) {
         blogInput.id = this.editBlogId;
-        this.store.dispatch(upadteBlog({ blogInput: blogInput }))
+        this.store.dispatch(updateBlog({ blogInput: blogInput }))
       } else {
         this.store.dispatch(addBlog({ blogInput: blogInput }))
       }

@@ -3,7 +3,7 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { getCounter } from '../../../store/counter/counter.selector';
-import { AppState } from '../../../shared/model/global/app-state';
+import { AppState } from '../../../shared/model/global/app.state';
 
 @Component({
   selector: 'app-counter-display',

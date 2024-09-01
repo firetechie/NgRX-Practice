@@ -11,7 +11,7 @@ import { Observable } from 'rxjs';
 import { CommonModule } from '@angular/common';
 import { getTitle } from '../../../store/counter/counter.selector';
 import { customCounter } from '../../../store/counter/counter.action';
-import { AppState } from '../../../shared/model/global/app-state';
+import { AppState } from '../../../shared/model/global/app.state';
 
 @Component({
   selector: 'app-custom-counter',

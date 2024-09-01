@@ -1,16 +1,16 @@
 import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
-import { Blog } from '../../../shared/model/blog';
-import { getBlog } from '../../../store/blog/blog.selector';
 import { Observable } from 'rxjs';
 import { MatCardModule } from '@angular/material/card';
-import { AppState } from '../../../shared/model/global/app-state';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog, MatDialogModule } from '@angular/material/dialog';
 import { AddUpdateBlogComponent } from './add-update-blog/add-update-blog.component';
 import { MatIconModule } from '@angular/material/icon';
-import { deleteBlog } from '../../../store/blog/blog.action';
+import { AppState } from '../../shared/model/global/app.state';
+import { loadBlog, deleteBlog } from '../../store/blog/blog.action';
+import { Blogs } from '../../shared/model/blog';
+import { getBlogInfo } from '../../store/blog/blog.selector';
 
 @Component({
   selector: 'app-blog',
@@ -20,7 +20,8 @@ import { deleteBlog } from '../../../store/blog/blog.action';
   styleUrl: './blog.component.css'
 })
 export class BlogComponent implements OnInit {
-  blogs$ !: Observable<Blog[]>;
+  // blogs$ !: Observable<Blog[]>;
+  blogInfo$ !: Observable<Blogs>;
 
   constructor(
     private store: Store<AppState>,
@@ -28,7 +29,10 @@ export class BlogComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.blogs$ = this.store.select(getBlog);
+    this.store.dispatch(loadBlog());
+    // this.blogs$ = this.store.select(getBlog);
+    this.blogInfo$ = this.store.select(getBlogInfo);
+    // this.store.select(getBlogInfo).subscribe((blogInfo) => this.blogInfo = blogInfo);
   }
 
   openAddBlog(): void {
