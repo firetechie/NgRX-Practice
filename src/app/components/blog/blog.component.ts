@@ -11,6 +11,7 @@ import { loadBlog, deleteBlog } from '../../store/blog/blog.action';
 import { Blogs } from '../../shared/model/blog';
 import { getBlogInfo } from '../../store/blog/blog.selector';
 import { spinner } from '../../store/global/app.action';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-blog',
@@ -26,6 +27,7 @@ export class BlogComponent implements OnInit {
   constructor(
     private store: Store<Blogs>,
     private dialog: MatDialog,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -44,7 +46,8 @@ export class BlogComponent implements OnInit {
   }
 
   openUpdateBlog(id: number): void {
-    this.blogForm(id, 'Update Blog', true);
+    // this.blogForm(id, 'Update Blog', true);
+    this.router.navigate(['blog/edit/' + id])
   }
 
   private blogForm(id: number, title: string, isEdit: boolean): void {
