@@ -10,6 +10,8 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideEffects } from '@ngrx/effects';
 import { BlogEffects } from './store/blog/blog.effects';
 import { AppEffects } from './store/global/app.effects';
+import { provideRouterStore } from '@ngrx/router-store';
+import { CustomSerializer } from './store/router/custom-serializer';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -18,6 +20,7 @@ export const appConfig: ApplicationConfig = {
     provideStore(GlobalState),
     provideEffects([BlogEffects, AppEffects]),
     provideHttpClient(),
-    provideStoreDevtools({ maxAge: false, logOnly: !isDevMode() }), provideAnimationsAsync(), provideAnimationsAsync(), provideAnimationsAsync()
+    provideStoreDevtools({ maxAge: false, logOnly: !isDevMode() }), provideAnimationsAsync(),
+    provideRouterStore({ serializer: CustomSerializer })
   ],
 };
